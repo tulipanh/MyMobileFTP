@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPurpleMid</item>
+        <item name="colorPrimaryDark">@color/colorPurpleMidDark</item>
+        <item name="colorAccent">@color/colorPurpleLight</item>
+    </style>
+
+    <style name="PurpleTextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPurpleLight</item>
+    </style>
+
+    <style name="PurpleEditText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:background">@color/colorPurpleLight</item>
+    </style>
+
+    <style name="InfoBarButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/infobar_button</item>
+        <item name="android:textColor">@drawable/infobar_button_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:alpha">0.9</item>
+    </style>
+
+</resources>

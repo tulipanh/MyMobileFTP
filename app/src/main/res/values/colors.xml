@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorError">#C0C03030</color>
+    <color name="colorWarning">#C0C0C030</color>
+    <color name="colorGood">#C030C030</color>
+
+    <!--Purple Palette-->
+    <color name="colorPurpleLight">#6D6777</color>
+    <color name="colorPurpleMidLight">#403454</color>
+    <color name="colorPurpleMid">#261743</color>
+    <color name="colorPurpleMidDark">#0D0221</color>
+    <color name="colorPurpleDark">#080016</color>
+
+    <!--Red Palette-->
+    <color name="colorRedLight">#877380</color>
+    <color name="colorRedMidLight">#5F3751</color>
+    <color name="colorRedMid">#4C1438</color>
+    <color name="colorRedMidDark">#250018</color>
+    <color name="colorRedDark">#190011</color>
+
+    <!--Blue Palette-->
+    <color name="colorBlueLight">#636A73</color>
+    <color name="colorBlueMidLight">#323F51</color>
+    <color name="colorBlueMid">#152840</color>
+    <color name="colorBlueMidDark">#020F20</color>
+    <color name="colorBlueDark">#000916</color>
+</resources>
