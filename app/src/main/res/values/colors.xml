@@ -6,7 +6,21 @@
     <color name="colorError">#C0C03030</color>
     <color name="colorWarning">#C0C0C030</color>
     <color name="colorGood">#C030C030</color>
+    <color name="white">#DDDDDD</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucentPurple">#706D6777</color>
+    <color name="colorShadow">#7F000000</color>
+    <color name="offwhite">#F7F7F7</color>
+    <color name="trueWhite">#FFFFFF</color>
+    <color name="selectedBlue">#20B0FF</color>
+    <color name="selectedBlueHighlight">#6020B0FF</color>
 
+    <color name="colorGreyLight">#CAC7CD</color>
+    <color name="colorGreyDark">#9A979D</color>
+    <color name="colorGreyBlack">#505050</color>
+    <color name="colorBlackDark">#FF0D0717</color>
+    <color name="colorBlackLight">#CC1D1727</color>
     <!--Purple Palette-->
     <color name="colorPurpleLight">#6D6777</color>
     <color name="colorPurpleMidLight">#403454</color>

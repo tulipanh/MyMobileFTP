@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:id="@+id/main_activity_layout">
 
 <!--
@@ -14,81 +15,279 @@ These ListViews display information regarding (Left to Right) Files Selected, Lo
     Status, and Transfer Progress.
 -->
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/connected_status_textview"
-        android:textSize="12sp"
-        android:background="@color/colorPurpleMidDark"
-        android:textColor="@color/colorPurpleLight"
-        android:textAlignment="center"/>
+        android:orientation="horizontal"
+        android:id="@+id/test_nav_bar">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:elevation="6dp"
+            android:id="@+id/test_nav_bar_client"
+            android:background="@color/colorGreyLight">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="7"
+                android:src="@drawable/ic_phone_android_red_48dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:paddingTop="1dp"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:text="/"
+                android:id="@+id/test_nav_bar_client_directory" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/test_nav_bar_client_expand"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            android:id="@+id/test_nav_bar_login"
+            android:background="@color/colorGreyLight">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:src="@drawable/ic_import_export_grey_48dp"
+                android:id="@+id/test_nav_bar_login_icon"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/test_nav_bar_login_expand"
+                android:background="@drawable/nav_bar_highlight" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:elevation="6dp"
+            android:id="@+id/test_nav_bar_server"
+            android:background="@color/colorGreyLight">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_cloud_blue_48dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:paddingTop="1dp"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:text="/"
+                android:id="@+id/test_nav_bar_server_directory"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/test_nav_bar_server_expand"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
-        android:id="@+id/fragment_container"
-        android:visibility="visible">
+        android:elevation="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container"
+            android:background="@color/white"
+            android:visibility="visible" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/tabs_container"
+            android:background="@color/translucentPurple">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/selected_tab_layout"
+                android:padding="2dp"
+                android:background="@drawable/selected_tab_background"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                android:elevation="12dp">
+
+                <ListView
+                    android:id="@+id/selected_client_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:divider="@null"
+                    android:elevation="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:background="@color/colorPurpleLight"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/selected_server_listview"
+                    android:divider="@null"
+                    android:elevation="8dp"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/status_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/status_tab_background"
+                android:padding="2dp"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/progress_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/progress_tab_background"
+                android:padding="2dp"
+                android:visibility="gone"
+                android:divider="@null"/>
+
+        </FrameLayout>
 
     </FrameLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/selected_listview"
-        android:visibility="gone">
-
-    </ListView>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/status_listview"
-        android:visibility="gone">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/progress_listview"
-        android:visibility="gone">
-
-    </ListView>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-        <Button
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/proto_Selected"
+            android:orientation="vertical"
+            android:elevation="6dp"
             android:id="@+id/selected_button"
-            style="@style/InfoBarButton"/>
+            android:background="@color/colorGreyLight">
 
-        <Button
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/infobar_selected_expand"
+                android:background="@color/colorGreyLight"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:text="@string/proto_Selected"
+                android:textColor="@color/colorPurpleMid"
+                android:textStyle="bold"
+                style="@style/EngravedText"
+                android:background="@color/colorGreyLight"
+                android:clickable="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/proto_Status"
+            android:orientation="vertical"
+            android:elevation="6dp"
             android:id="@+id/status_button"
-            style="@style/InfoBarButton"/>
+            android:background="@color/colorGreyLight">
 
-        <Button
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/infobar_status_expand"
+                android:background="@color/colorGreyLight"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:text="@string/proto_Status"
+                android:textColor="@color/colorPurpleMid"
+                android:textStyle="bold"
+                style="@style/EngravedText"
+                android:background="@color/colorGreyLight"
+                android:clickable="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/proto_Progress"
+            android:orientation="vertical"
+            android:elevation="6dp"
             android:id="@+id/progress_button"
-            style="@style/InfoBarButton"/>
+            android:background="@color/colorGreyLight">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/infobar_progress_expand"
+                android:background="@color/colorGreyLight"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:text="@string/proto_Progress"
+                android:textColor="@color/colorPurpleMid"
+                android:textStyle="bold"
+                style="@style/EngravedText"
+                android:background="@color/colorGreyLight"
+                android:clickable="false"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

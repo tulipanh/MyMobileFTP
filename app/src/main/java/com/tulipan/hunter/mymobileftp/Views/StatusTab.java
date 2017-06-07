@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tulipan.hunter.mymobileftp.MyFTPActivity;
@@ -14,17 +15,19 @@ import com.tulipan.hunter.mymobileftp.R;
 import com.tulipan.hunter.mymobileftp.Structures.StatusMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Hunter on 12/13/2016.
  */
+
 public class StatusTab {
     private MyFTPActivity mParentActivity;
-    private Button mButton;
+    private LinearLayout mButton;
     private RecyclerView mRecyclerView;
     private StatusAdapter mAdapter;
 
-    public StatusTab(MyFTPActivity activity, Button button, RecyclerView recview) {
+    public StatusTab(MyFTPActivity activity, LinearLayout button, RecyclerView recview) {
         mParentActivity = activity;
         mButton = button;
         mRecyclerView = recview;
@@ -58,12 +61,18 @@ public class StatusTab {
             mText.setText(mMessageString);
             mTime.setText(mTimeCode);
 
-            if (mTypeCode == 2) {
-                mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorError));
-            } else if (mTypeCode == 1) {
-                mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorWarning));
-            } else {
-                mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorGood));
+            switch (mTypeCode) {
+                case 3:
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorError));
+                    break;
+                case 2:
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorWarning));
+                    break;
+                case 1:
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorGood));
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -98,16 +107,21 @@ public class StatusTab {
     }
 
     public void addError(String message) {
-        mAdapter.addMessage(message, 2);
+        mAdapter.addMessage(message, 3);
         mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
     }
 
     public void addWarning(String message) {
-        mAdapter.addMessage(message, 1);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.addMessage(message, 2);
+        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
     }
 
     public void addStatus(String message) {
+        mAdapter.addMessage(message, 1);
+        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
+    }
+
+    public void addSentMessage(String message) {
         mAdapter.addMessage(message, 0);
         mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
     }

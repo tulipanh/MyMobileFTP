@@ -16,11 +16,67 @@
         <item name="android:background">@color/colorPurpleLight</item>
     </style>
 
-    <style name="InfoBarButton" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@drawable/infobar_button</item>
-        <item name="android:textColor">@drawable/infobar_button_text</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:alpha">0.9</item>
+    <style name="FileSelectButtonRed" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/file_button_red</item>
+    </style>
+
+    <style name="FileSelectButtonBlue" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/file_button_blue</item>
+    </style>
+
+    <style name="SelectedClientTransferButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selected_transfer_red</item>
+    </style>
+
+    <style name="SelectedClientClearButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selected_clear_red</item>
+    </style>
+
+    <style name="SelectedServerTransferButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selected_transfer_blue</item>
+    </style>
+
+    <style name="SelectedServerClearButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selected_clear_blue</item>
+    </style>
+
+    <style name="PurplePauseButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/purple_pause</item>
+    </style>
+
+    <style name="PurpleClearButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/purple_clear</item>
+    </style>
+
+    <style name="TestNavBarItem" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/nav_bar_item</item>
+        <item name="android:textColor">@drawable/nav_bar_item_text</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="EngravedText" parent="Widget.AppCompat.Button.Borderless">
+
+        <item name="android:padding">0dp</item>
+        <item name="android:shadowColor">@color/colorShadow</item>
+        <item name="android:shadowDx">-1</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">1.0</item>
+        -->
+    </style>
+
+    <style name="EmbossedText">
+
+        <item name="android:shadowColor">@color/colorShadow</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2.0</item>
+        -->
+    </style>
+
+    <style name="LoginInfoItem">
+        <item name="android:background">@color/trueWhite</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
 </resources>

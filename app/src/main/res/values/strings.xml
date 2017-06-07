@@ -3,13 +3,16 @@
     <string name="proto_Selected">Selected</string>
     <string name="proto_Status">Status</string>
     <string name="proto_Progress">Progress</string>
-    <string name="proto_IPAddress">IP Address:</string>
+    <string name="proto_IPAddress">Host:</string>
     <string name="proto_IPA_example">0.0.0.0</string>
-    <string name="proto_PortNumber">Port Number:</string>
+    <string name="proto_PortNumber">Port:</string>
     <string name="proto_Port_example">0 &#8211; 65535</string>
     <string name="proto_Username">User Name:</string>
     <string name="proto_Password">Password:</string>
-    <string name="proto_login">Login</string>
-    <string name="proto_disconnect">Disconnect</string>
+    <string name="remember">Remember</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
     <string name="not_connected">Not Connected</string>
+    <string name="serverside_target_default_text">Server-Side Target: /</string>
+    <string name="clientside_target_default_text">Client-Side Target: /</string>
 </resources>

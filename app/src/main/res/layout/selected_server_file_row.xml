@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="2dp">
+
+    <LinearLayout
+        android:id="@+id/filebackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/trueWhite">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            style="@style/SelectedServerTransferButton"
+            android:id="@+id/selected_transfer_button"/>
+
+        <TextView
+            android:id="@+id/filename"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:padding="5dp"
+            android:textColor="@color/colorGreyBlack" />
+
+        <TextView
+            android:id="@+id/filesize"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:textColor="@color/colorGreyBlack"/>
+
+        <ImageButton
+            android:id="@+id/selected_remove_button"
+            style="@style/SelectedServerClearButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
