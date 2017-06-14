@@ -70,7 +70,6 @@ public class SelectedListAdapter extends ArrayAdapter<SelectedListItem> {
                         @Override
                         public void onClick(View v) {
                             mParentTab.handToProgressTab(item);
-                            v.setEnabled(false);
                         }
                     });
                 } else {
@@ -78,7 +77,6 @@ public class SelectedListAdapter extends ArrayAdapter<SelectedListItem> {
                         @Override
                         public void onClick(View v) {
                             mParentTab.handToProgressTab(item);
-                            v.setEnabled(false);
                         }
                     });
                 }

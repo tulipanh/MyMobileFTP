@@ -163,7 +163,8 @@ public class TransferManager {
     public void initiateNextTransfer(Integer result) {
         pause();
         mItemQueue.get(mQueuePosition).transferResult = result;
-        mParentActivity.clearFromSelected(mItemQueue.get(mQueuePosition));
+        mParentActivity.clearFromSelected(mItemQueue.get(mQueuePosition).filePath,
+                mItemQueue.get(mQueuePosition).isClient());
         mQueuePosition++;
         if (mItemQueue.size() > mQueuePosition) {
             unpause();
@@ -194,7 +195,7 @@ public class TransferManager {
             FileTransferTask task = mTaskQueue.get(i);
             if (item.transferResult > 0 && item.transferResult < 4) {
                 // Remove all incomplete items from the SelectedList
-                mParentActivity.clearFromSelected(item);
+                mParentActivity.clearFromSelected(item.filePath, item.isClient() );
                 // Clear any files that have been created but not fully transferred.
                 deleteIncompleteTarget(item);
             }

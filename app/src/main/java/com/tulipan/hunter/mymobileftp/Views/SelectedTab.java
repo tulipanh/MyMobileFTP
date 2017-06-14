@@ -90,5 +90,6 @@ public class SelectedTab {
 
     public void handToProgressTab(SelectedListItem item) {
         mParentActivity.addToTaskQueue(item);
+        mParentActivity.clearFromSelected(item.getPath(), item.isClient());
     }
 }

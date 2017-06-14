@@ -250,13 +250,16 @@ public class MyFTPActivity extends FragmentActivity {
      * Signals to the proper file location (Client or Server) to remove an item from their list of
      * selected items. This gets called from the Transfer Manager once the transfer of said file
      * is complete or from the Progress Tab when a file is manually removed from queue.
-     * @param item The TransferItem corresponding to that file transfer.
+     * @param filePath This String contains the path of the file to be removed from the
+     *                 selected list.
+     * @param isClient This boolean indicates whether or not the file is located on the device or
+     *                 the server.
      */
-    public void clearFromSelected(TransferItem item) {
-        if (item.isClient()) {
-            mClientFragment.setItemSelected(item.filePath, false);
+    public void clearFromSelected(String filePath, boolean isClient) {
+        if (isClient) {
+            mClientFragment.setItemSelected(filePath, false);
         } else {
-            mServerFragment.setItemSelected(item.filePath, false);
+            mServerFragment.setItemSelected(filePath, false);
         }
     }
 
@@ -267,7 +270,7 @@ public class MyFTPActivity extends FragmentActivity {
      */
     public void removeItem(TransferItem item) {
         mTransferManager.removeItem(item);
-        clearFromSelected(item);
+        clearFromSelected(item.filePath, item.isClient());
     }
 
     /**
