@@ -1,13 +1,11 @@
 package com.tulipan.hunter.mymobileftp.Structures;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,9 +15,6 @@ import com.tulipan.hunter.mymobileftp.R;
 
 import java.util.List;
 
-/**
- * Created by Hunter on 4/10/2017.
- */
 public class FileListAdapter extends ArrayAdapter<FileListItem> {
     private FileSelector mParentFragment;
 
@@ -91,8 +86,7 @@ public class FileListAdapter extends ArrayAdapter<FileListItem> {
                 }
                 selectedButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        if (item.isDirectory()) return;
-                        // TODO: At a later date, need to select or deselect all files in directories recursively.
+                        if (item.isDirectory()) return; // Functionality not implemented yet.
                         if (item.isSelected()) {
                             mParentFragment.setItemSelected(item.getPath(), false);
                             item.setSelected(false);

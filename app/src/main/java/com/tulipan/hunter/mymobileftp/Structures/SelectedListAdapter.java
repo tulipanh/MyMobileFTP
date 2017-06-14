@@ -1,15 +1,11 @@
 package com.tulipan.hunter.mymobileftp.Structures;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tulipan.hunter.mymobileftp.R;
@@ -17,9 +13,6 @@ import com.tulipan.hunter.mymobileftp.Views.SelectedTab;
 
 import java.util.List;
 
-/**
- * Created by Hunter on 4/11/2017.
- */
 public class SelectedListAdapter extends ArrayAdapter<SelectedListItem> {
     SelectedTab mParentTab;
 
@@ -31,7 +24,8 @@ public class SelectedListAdapter extends ArrayAdapter<SelectedListItem> {
         super(context, resource, items);
     }
 
-    public SelectedListAdapter(Context context, int resource, List<SelectedListItem> items, SelectedTab parent) {
+    public SelectedListAdapter(Context context, int resource, List<SelectedListItem> items,
+                               SelectedTab parent) {
         super(context, resource, items);
         mParentTab = parent;
     }

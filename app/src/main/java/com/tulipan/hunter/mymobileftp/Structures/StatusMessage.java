@@ -4,9 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Hunter on 12/13/2016.
- */
 public class StatusMessage {
     public final String message;
     public final Integer type;

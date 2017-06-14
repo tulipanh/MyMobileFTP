@@ -8,19 +8,12 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.SocketException;
 
-/**
- * Created by Hunter on 4/13/2017.
- */
 public class FTPClientWrapper {
     private FTPSClient mClient;
     private MyFTPActivity mActivity;

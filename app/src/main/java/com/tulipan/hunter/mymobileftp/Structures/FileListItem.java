@@ -1,8 +1,5 @@
 package com.tulipan.hunter.mymobileftp.Structures;
 
-/**
- * Created by Hunter on 4/10/2017.
- */
 public class FileListItem {
     private String mFileName;
     private String mFilePath;

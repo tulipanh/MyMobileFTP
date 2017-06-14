@@ -1,10 +1,8 @@
 package com.tulipan.hunter.mymobileftp.Views;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.tulipan.hunter.mymobileftp.MyFTPActivity;
 import com.tulipan.hunter.mymobileftp.R;
@@ -18,9 +16,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/**
- * Created by Hunter on 12/14/2016.
- */
 public class SelectedTab {
     private MyFTPActivity mParentActivity;
     private LinearLayout mButton;
@@ -45,11 +40,13 @@ public class SelectedTab {
         mClientFileList = new ArrayList<>();
         mServerFileList = new ArrayList<>();
 
-        mClientListAdapter = new SelectedListAdapter(mParentActivity, R.layout.selected_file_list_row, mClientFileList, SelectedTab.this);
+        mClientListAdapter = new SelectedListAdapter(mParentActivity,
+                R.layout.selected_file_list_row, mClientFileList, SelectedTab.this);
         mClientListView.setAdapter(mClientListAdapter);
         mClientListView.setTextFilterEnabled(true);
 
-        mServerListAdapter = new SelectedListAdapter(mParentActivity, R.layout.selected_file_list_row, mServerFileList, SelectedTab.this);
+        mServerListAdapter = new SelectedListAdapter(mParentActivity,
+                R.layout.selected_file_list_row, mServerFileList, SelectedTab.this);
         mServerListView.setAdapter(mServerListAdapter);
         mServerListView.setTextFilterEnabled(true);
 
@@ -68,13 +65,15 @@ public class SelectedTab {
 
         for (String s : clientList) {
             File f = new File(s);
-            mClientFileList.add(new SelectedListItem(mParentActivity.getClientSelector(), f.getName(), f.getPath(), f.length(), true));
+            mClientFileList.add(new SelectedListItem(mParentActivity.getClientSelector(),
+                    f.getName(), f.getPath(), f.length(), true));
         }
         for (String s : serverList) {
             FTPFile f = mClient.getFileInfo(s);
             String[] parts = f.getName().split("/");
             String name = parts[parts.length-1];
-            mServerFileList.add(new SelectedListItem(mParentActivity.getServerSelector(), name, f.getName(), f.getSize(), false));
+            mServerFileList.add(new SelectedListItem(mParentActivity.getServerSelector(),
+                    name, f.getName(), f.getSize(), false));
         }
         mClientListAdapter.notifyDataSetChanged();
         mServerListAdapter.notifyDataSetChanged();

@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/**
- * Created by Hunter on 12/22/2016.
- */
 public class FileExplorer {
     private MyFTPActivity mParentActivity;
     private File mCurrentDirectory;

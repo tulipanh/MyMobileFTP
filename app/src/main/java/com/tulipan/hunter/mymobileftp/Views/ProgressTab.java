@@ -1,7 +1,6 @@
 package com.tulipan.hunter.mymobileftp.Views;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -12,9 +11,6 @@ import com.tulipan.hunter.mymobileftp.Structures.TransferItem;
 
 import java.util.List;
 
-/**
- * Created by Hunter on 12/14/2016.
- */
 public class ProgressTab {
     private MyFTPActivity mParentActivity;
     private LinearLayout mButton;
@@ -31,7 +27,8 @@ public class ProgressTab {
         mListView = list;
         mTransferList = mParentActivity.getTransferList();
 
-        mAdapter = new ProgressListAdapter(mParentActivity, R.layout.progress_list_row, mTransferList, ProgressTab.this);
+        mAdapter = new ProgressListAdapter(mParentActivity, R.layout.progress_list_row,
+                mTransferList, ProgressTab.this);
         mListView.setAdapter(mAdapter);
         mListView.setTextFilterEnabled(true);
 
@@ -68,5 +65,6 @@ public class ProgressTab {
 
     public void removeProgressItem(TransferItem item) {
         mParentActivity.removeItem(item);
+        updateList();
     }
 }

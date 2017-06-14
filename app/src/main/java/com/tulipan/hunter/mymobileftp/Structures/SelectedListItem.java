@@ -1,10 +1,5 @@
 package com.tulipan.hunter.mymobileftp.Structures;
 
-import android.support.v4.app.Fragment;
-
-/**
- * Created by Hunter on 4/11/2017.
- */
 public class SelectedListItem {
     private String mFileName;
     private String mFilePath;
@@ -12,7 +7,8 @@ public class SelectedListItem {
     private long mSize;
     private FileSelector mParent;
 
-    public SelectedListItem(FileSelector parent, String name, String path, long size, boolean isClient) {
+    public SelectedListItem(FileSelector parent, String name, String path,
+                            long size, boolean isClient) {
         mFileName = name;
         mFilePath = path;
         mSize = size;

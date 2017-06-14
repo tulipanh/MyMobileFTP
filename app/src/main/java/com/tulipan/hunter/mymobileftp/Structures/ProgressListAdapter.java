@@ -16,9 +16,6 @@ import com.tulipan.hunter.mymobileftp.Views.ProgressTab;
 
 import java.util.List;
 
-/**
- * Created by Hunter on 4/28/2017.
- */
 public class ProgressListAdapter extends ArrayAdapter<TransferItem> {
     ProgressTab mParentTab;
 
@@ -30,7 +27,8 @@ public class ProgressListAdapter extends ArrayAdapter<TransferItem> {
         super(context, resource, items);
     }
 
-    public ProgressListAdapter(Context context, int resource, List<TransferItem> items, ProgressTab parent) {
+    public ProgressListAdapter(Context context, int resource, List<TransferItem> items,
+                               ProgressTab parent) {
         super(context, resource, items);
         mParentTab = parent;
     }
@@ -94,14 +92,16 @@ public class ProgressListAdapter extends ArrayAdapter<TransferItem> {
 
                 case 3: // File transfer is done and an error occurred
                     pauseButton.setEnabled(false);
-                    result.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_outline_purple_48dp));
+                    result.setImageDrawable(ContextCompat.getDrawable(getContext(),
+                            R.drawable.ic_error_outline_purple_48dp));
                     fileSize.setVisibility(View.GONE);
                     result.setVisibility(View.VISIBLE);
                     break;
 
                 case 4: // File transfer is done and there was no error
                     pauseButton.setEnabled(false);
-                    result.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_done_purple_48dp));
+                    result.setImageDrawable(ContextCompat.getDrawable(getContext(),
+                            R.drawable.ic_done_purple_48dp));
                     fileSize.setVisibility(View.GONE);
                     result.setVisibility(View.VISIBLE);
                     break;

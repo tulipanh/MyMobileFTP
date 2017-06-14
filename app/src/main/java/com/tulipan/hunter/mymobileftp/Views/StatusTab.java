@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,11 +14,6 @@ import com.tulipan.hunter.mymobileftp.R;
 import com.tulipan.hunter.mymobileftp.Structures.StatusMessage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-/**
- * Created by Hunter on 12/13/2016.
- */
 
 public class StatusTab {
     private MyFTPActivity mParentActivity;
@@ -32,7 +26,8 @@ public class StatusTab {
         mButton = button;
         mRecyclerView = recview;
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mParentActivity, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mParentActivity,
+                LinearLayoutManager.VERTICAL, false));
         mAdapter = new StatusAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -63,13 +58,16 @@ public class StatusTab {
 
             switch (mTypeCode) {
                 case 3:
-                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorError));
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity,
+                            R.color.colorError));
                     break;
                 case 2:
-                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorWarning));
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity,
+                            R.color.colorWarning));
                     break;
                 case 1:
-                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity, R.color.colorGood));
+                    mText.setBackgroundColor(ContextCompat.getColor(mParentActivity,
+                            R.color.colorGood));
                     break;
                 default:
                     break;

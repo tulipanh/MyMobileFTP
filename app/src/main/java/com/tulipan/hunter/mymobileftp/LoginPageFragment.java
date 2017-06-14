@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,34 +19,31 @@ import android.widget.LinearLayout;
 
 import com.tulipan.hunter.mymobileftp.Structures.FTPClientWrapper;
 
-import org.apache.commons.net.ProtocolCommandEvent;
-import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPReply;
-import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.apache.commons.validator.routines.IntegerValidator;
 import org.apache.commons.validator.routines.UrlValidator;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Created by Hunter on 12/1/2016.
+ * LoginPageFragment is the initial fragment the user sees when they open the application. This
+ * fragment manages the input of login information and the establishment of a connection to the
+ * server.
  */
+public class LoginPageFragment extends Fragment implements
+        View.OnClickListener,
+        View.OnFocusChangeListener,
+        CompoundButton.OnCheckedChangeListener {
 
-/**
- * TODO:
- * One key question with this fragment will be how to handle password input and communication
- * in a secure manner.
- */
-public class LoginPageFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener, CompoundButton.OnCheckedChangeListener {
     private MyFTPActivity mCurrentActivity;
     private FTPClientWrapper mClient = null;
     private SharedPreferences mPrefs;
 
+    // These Tiles are the LinearLayouts containing all input regarding each piece of login info.
     private LinearLayout mAddressTile = null;
     private LinearLayout mPortTile = null;
     private LinearLayout mUsernameTile = null;
@@ -58,14 +54,16 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
     private EditText mUsernameText = null;
     private EditText mPasswordText = null;
 
+    // Checkboxes for each input for the user to determine which info gets saved between uses
     private CheckBox mAddressCheck = null;
     private CheckBox mPortCheck = null;
     private CheckBox mUsernameCheck = null;
     private CheckBox mPasswordCheck = null;
+
     private Button mLoginButton = null;
     private Button mDisconnectButton = null;
 
-    // REMOVE private StatusListener mStatusListener = null;
+    // private StatusListener mStatusListener = null; Kept for future reference.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,8 +79,9 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
 
         /**
-         * I am leaving the StatusListener code in the file, but commented out so that  I can refer
-         * back to it in the future as an example of how to set up a ProtocolCommandListener.
+         * I am leaving the StatusListener code in the file, but commented out so that I can refer
+         * back to it in the future as an example of how to set up a ProtocolCommandListener. It
+         * was removed because it does not play well with Asynchronous operations.
          */
         /*
         if (mStatusListener == null) {
@@ -93,7 +92,9 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.login_page_fragment, container, false);
 
         initInterface(v);
@@ -101,10 +102,13 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         return v;
     }
 
+    /**
+     * Establishes the onClick behavior for all applicable UI elements in the Login Fragment.
+     * @param v The View that was clicked. This is used to determine the actions to be taken
+     *          using a switch statement.
+     */
     @Override
     public void onClick(View v) {
-        View parent;
-
         switch(v.getId()) {
             case R.id.login_button:
                 saveCheckedInfo();
@@ -148,6 +152,14 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Establishes the behavior for when any of the "Remember" checkboxes are toggled. For each,
+     * a boolean in the SharedPreferences indicates whether or not to save the info, and a String
+     * will be placed in the SharedPreferences upon the pressing of the Connect/Login button.
+     * @param buttonView This CompoundButton is the code object corresponding to checkbox that was
+     *                   toggled.
+     * @param isChecked This boolean is indicated whether the checkbox was activated or deactivated.
+     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         SharedPreferences.Editor editor = mPrefs.edit();
@@ -193,6 +205,12 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Establishes the behavior for when a UI element in the Fragment gets focus. This is applied
+     * to the EditTexts exclusively and only does anything when the element gains focus.
+     * @param v The View that has gained or lost focus.
+     * @param hasFocus The boolean indicating whether the focus was gained or lost.
+     */
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
@@ -200,11 +218,19 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Alters the elevation of the tiles in the Layout, raising the one that is selected and
+     * lowing the ones that are not.
+     * @param tile The tile that was selected.
+     */
     private void selectTile(LinearLayout tile) {
         resetLoginItemElevations();
         if (tile != null) tile.setElevation(16);
     }
 
+    /**
+     * Helper function which just resets all tile elevations to 0.
+     */
     private void resetLoginItemElevations() {
         mAddressTile.setElevation(0);
         mPortTile.setElevation(0);
@@ -212,16 +238,32 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         mPasswordTile.setElevation(0);
     }
 
+    /**
+     * Saves all the information which the user has selected to be remembered. This information is
+     * saved as Strings in SharedPreferences.
+     */
     private void saveCheckedInfo() {
         SharedPreferences.Editor editor = mPrefs.edit();
-        if (mAddressCheck.isChecked()) editor.putString("HostValue", mAddressText.getText().toString());
-        else editor.remove("HostValue");
-        if (mPortCheck.isChecked()) editor.putString("PortValue", mPortText.getText().toString());
-        else editor.remove("PortValue");
-        if (mUsernameCheck.isChecked()) editor.putString("UsernameValue", mUsernameText.getText().toString());
-        else editor.remove("UsernameValue");
-        if (mPasswordCheck.isChecked()) editor.putString("PasswordValue", mPasswordText.getText().toString());
-        else editor.remove("PasswordValue");
+        if (mAddressCheck.isChecked()) {
+            editor.putString("HostValue", mAddressText.getText().toString());
+        } else {
+            editor.remove("HostValue");
+        }
+        if (mPortCheck.isChecked()) {
+            editor.putString("PortValue", mPortText.getText().toString());
+        } else {
+            editor.remove("PortValue");
+        }
+        if (mUsernameCheck.isChecked()) {
+            editor.putString("UsernameValue", mUsernameText.getText().toString());
+        } else {
+            editor.remove("UsernameValue");
+        }
+        if (mPasswordCheck.isChecked()) {
+            editor.putString("PasswordValue", mPasswordText.getText().toString());
+        } else {
+            editor.remove("PasswordValue");
+        }
         editor.apply();
     }
 
@@ -240,9 +282,13 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         @Override
         public void protocolReplyReceived(ProtocolCommandEvent event) {
             String message = "SERVER: " + event.getReplyCode() + " - " + event.getMessage();
-            if (event.getReplyCode() >= 400) mCurrentActivity.getInterface().printError(message);
-            else if (event.getReplyCode() >= 300) mCurrentActivity.getInterface().printWarning(message);
-            else ;//mCurrentActivity.getInterface().printStatus(message);
+            if (event.getReplyCode() >= 400) {
+                mCurrentActivity.getInterface().printError(message);
+            } else if (event.getReplyCode() >= 300) {
+                    mCurrentActivity.getInterface().printWarning(message);
+            } else {
+                mCurrentActivity.getInterface().printStatus(message);
+            }
         }
 
         @Override
@@ -259,6 +305,14 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
     }
     */
 
+    /**
+     * Initializes all UI elements in the Login Fragment. This includes connecting the objects in
+     * this file with the objects in the xml files, setting OnClick, OnFocusChange, and
+     * OnCheckedChange listeners, and setting initial values in the EditTexts depending on if
+     * there are saved values for those items.
+     * @param view This View is always the primary Layout for the Login Fragment, of which every
+     *             View below is a child.
+     */
     private void initInterface(View view) {
         mAddressTile = (LinearLayout) view.findViewById(R.id.login_host_tile);
         mAddressTile.setOnClickListener(this);
@@ -303,6 +357,12 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         setConnected(mClient.isConnected());
     }
 
+    /**
+     * Disables all information input fields and the Connect Button when the connection is
+     * established. Enables them when the connection is broken.
+     * @param connected This boolean indicates whether or not the connection to the server has been
+     *                  established.
+     */
     public void setConnected(boolean connected) {
         mLoginButton.setEnabled(!connected);
         mAddressText.setEnabled(!connected);
@@ -313,6 +373,10 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         mCurrentActivity.setConnected(connected);
     }
 
+    /**
+     * Checks if the user's device has a network connection. Posts its findings to the Status Tab.
+     * @return This boolean indicates whether or not the device has a network connection.
+     */
     private boolean networkAccessible() {
         ConnectivityManager connManager = (ConnectivityManager)
                 mCurrentActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -326,6 +390,12 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Checks if the host name and port number provided by the user are valid. Accepts an
+     * IP Address or domain name.
+     * @return This boolean indicates whether or not the user has provided a valid host name and
+     * port number.
+     */
     private boolean inputsValid() {
         boolean error = false;
         UrlValidator urlValidator = UrlValidator.getInstance();
@@ -334,13 +404,15 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
 
         // Check if address is valid.
         // URLs will only work if an application protocol is provided.
-        if(!(urlValidator.isValid("ftp://" + mAddressText.getText().toString()) || ipValidator.isValid(mAddressText.getText().toString()))) {
+        if(!(urlValidator.isValid("ftp://" + mAddressText.getText().toString()) ||
+                ipValidator.isValid(mAddressText.getText().toString()))) {
             mCurrentActivity.getInterface().printError("Address not valid.");
             error = true;
         }
         // Check if port number is valid.
         String portString = mPortText.getText().toString();
-        if((!(intValidator.isValid(portString) && Integer.parseInt(portString) >= 0 && Integer.parseInt(portString) <= 65535))) {
+        if((!(intValidator.isValid(portString) && Integer.parseInt(portString) >= 0 &&
+                Integer.parseInt(portString) <= 65535))) {
             mCurrentActivity.getInterface().printError("Port not valid.");
             error = true;
         }
@@ -348,17 +420,27 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         return !error;
     }
 
+    /**
+     * Initiates the connection and login attempt, and returns logical and of the results of both.
+     * @return This boolean is the ANDed results of the calls to attemptConnect and attemptLogin().
+     */
     private boolean connectAndLogin() {
-        if (attemptConnect() && attemptLogin()) return true;
-        else return false;
+        return (attemptConnect() && attemptLogin());
     }
 
+    /**
+     * Initiates connection to the server using the info the user has provided.
+     * @return This boolean is true if the connection was successful and false if any of the
+     * potential errors are encountered.
+     */
     private boolean attemptConnect() {
         try {
             InetAddress address = InetAddress.getByName(mAddressText.getText().toString());
-            mCurrentActivity.getInterface().printStatus("Attempting connection to " + mAddressText.getText().toString() + ".");
+            mCurrentActivity.getInterface().printStatus("Attempting connection to " +
+                    mAddressText.getText().toString() + ".");
             mClient.connect(address, Integer.parseInt(mPortText.getText().toString()));
-            mCurrentActivity.getInterface().printStatus("Connected to " + mAddressText.getText().toString() + ".");
+            mCurrentActivity.getInterface().printStatus("Connected to " +
+                    mAddressText.getText().toString() + ".");
 
             int reply = mClient.getReplyCode();
 
@@ -371,16 +453,24 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
 
             return true;
         } catch (UnknownHostException uhe) {
-            Log.e(mCurrentActivity.TAG, "UnknownHostException from attemptConnect(): " + uhe.getMessage());
+            Log.e(mCurrentActivity.TAG, "UnknownHostException from attemptConnect(): " +
+                    uhe.getMessage());
             return false;
         }
     }
 
+    /**
+     * Initiates login to the server using the info the user has provided. Also performs some setup
+     * in preparation of file transfers. Returns the result of these operations.
+     * @return This boolean value is the ANDed results of the calls that have been performed
+     * through the FTPSClient.
+     */
     private boolean attemptLogin() {
         boolean result = true;
         mClient.setBufferSize(1000);
 
-        if (!mClient.login(mUsernameText.getText().toString(), mPasswordText.getText().toString())) {
+        if (!mClient.login(mUsernameText.getText().toString(),
+                mPasswordText.getText().toString())) {
             mCurrentActivity.cleanUpFTPClient();
             return false;
         }
@@ -399,6 +489,10 @@ public class LoginPageFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Relays a signal to clear the queue of file transfers. Used as part of a clean up process
+     * when disconnecting.
+     */
     private void clearTransferQueue() {
         mCurrentActivity.clearTransferQueue();
     }
